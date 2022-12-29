@@ -1,0 +1,10 @@
+DROP DATABASE IF EXISTS jpa_in_depth;
+CREATE DATABASE IF NOT EXISTS jpa_in_depth;
+USE jpa_in_depth;
+
+CREATE TABLE IF NOT EXISTS course (
+    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255)
+);
+
+# INSERT INTO course(id,name) VALUES (10001, 'AWS');
