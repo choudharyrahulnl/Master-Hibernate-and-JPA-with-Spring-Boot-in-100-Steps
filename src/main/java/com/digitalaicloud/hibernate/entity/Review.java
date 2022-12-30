@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@ToString(of = {"id","description"})
+@ToString(of = {"id","rating","description"})
 @EqualsAndHashCode(of = {"id"})
 public class Review {
 
@@ -18,6 +18,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "rating")
+    private String rating;
 
     @Column(name = "description")
     private String description;

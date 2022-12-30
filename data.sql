@@ -44,8 +44,9 @@ INSERT INTO passport(number) VALUES ('K8426');
 
 CREATE TABLE IF NOT EXISTS review (
     id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    rating VARCHAR(255),
     description VARCHAR(255)
 );
-INSERT INTO review(description) VALUES ('5 Star');
-INSERT INTO review(description) VALUES ('3 Star');
-INSERT INTO review(description) VALUES ('4 Star');
+INSERT INTO review(rating,description) VALUES ('5','Great Course');
+INSERT INTO review(rating,description) VALUES ('3','Nice Course');
+INSERT INTO review(rating,description) VALUES ('4','Good Course');
