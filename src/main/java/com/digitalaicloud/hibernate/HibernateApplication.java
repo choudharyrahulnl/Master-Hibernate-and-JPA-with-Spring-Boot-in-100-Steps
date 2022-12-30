@@ -1,11 +1,11 @@
 package com.digitalaicloud.hibernate;
 
-import com.digitalaicloud.hibernate.entity.Course;
 import com.digitalaicloud.hibernate.repository.CourseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @Slf4j
 @SpringBootApplication
@@ -33,7 +33,10 @@ public class HibernateApplication implements CommandLineRunner {
 //		log.info("Delete Course with is 1 ");
 //		courseRepository.deleteById(1L);
 
-		courseRepository.playWithEntityManager();
+//		courseRepository.playWithEntityManager();
+
+//		courseRepository.playWithEntityManagerUpdateFalse();
+//		courseRepository.playWithEntityManagerInsertFalse();
 	}
 
 

@@ -35,9 +35,50 @@ public class CourseRepository {
     }
 
     public void playWithEntityManager() {
-        Course course = Course.builder().name("AZURE").build();
-        entityManager.persist(course);
 
-        course.setName("Azure");
+        Course azure = Course.builder().name("AZURE").build();
+        entityManager.persist(azure);
+
+        // We can forcefully call flush to make the db call
+        entityManager.flush();
+
+        // EntityManager is keeping track of object azure, when we update azure object using setter
+        // EntityManager will do dirty checking and find difference and make db call to update
+        azure.setName("Azure-Updated");
+
+
+
+        Course aws = Course.builder().name("AWS").build();
+        entityManager.persist(aws);
+
+        aws.setName("AWS-Updated");
+
+        // We can detach a persistent object after which entity manager will no longer track this
+        // and if we change aws object these changes will not be push to db
+        //entityManager.detach(aws);
+
+        // We can also call clear to remove everything from entity manager
+        // entityManager.clear();
+
+        // refresh from db, this will reset aws object from db that means aws.setName("AWS-Updated") aws object
+        // is lost now and entity manager not found any change so no db call
+        entityManager.refresh(aws);
+    }
+
+    public void playWithEntityManagerUpdateFalse() {
+
+        Course azure = Course.builder().name("AZURE").price(395.00).build();
+        entityManager.persist(azure);
+
+        azure.setName("Azure-Updated!!");
+        azure.setPrice(499.00);
+    }
+
+    public void playWithEntityManagerInsertFalse() {
+
+        Course azure = Course.builder().name("AZURE").price(395.00).build();
+        entityManager.persist(azure);
+
+        azure.setName("Azure-Updated!!");
     }
 }
