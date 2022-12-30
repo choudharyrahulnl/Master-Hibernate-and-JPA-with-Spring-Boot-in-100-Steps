@@ -3,8 +3,8 @@ package com.digitalaicloud.hibernate.repository;
 import com.digitalaicloud.hibernate.entity.Course;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional // IF WE CHANGE DATA WE NEED @TRANSACTIONAL EX INSERT/UPDATE/DELETE
