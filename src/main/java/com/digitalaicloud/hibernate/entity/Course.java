@@ -3,6 +3,10 @@ package com.digitalaicloud.hibernate.entity;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
 
 @Entity
 @NoArgsConstructor
@@ -28,5 +32,10 @@ public class Course {
     // updatable = true by default so on update this field will get its value
     @Column(name = "price", insertable = false)
     private Double price;
+
+    @CreationTimestamp
+    private Instant createdDate;
+    @UpdateTimestamp
+    private Instant updatedDate;
 
 }

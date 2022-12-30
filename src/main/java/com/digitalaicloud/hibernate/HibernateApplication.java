@@ -35,8 +35,8 @@ public class HibernateApplication implements CommandLineRunner {
 
 //		courseRepository.playWithEntityManager();
 
-//		courseRepository.playWithEntityManagerUpdateFalse();
-		courseRepository.playWithEntityManagerInsertFalse();
+//		courseRepository.playWithEntityManagerInsertFalse();
+		courseRepository.playWithEntityManagerUpdateFalse();
 	}
 
 

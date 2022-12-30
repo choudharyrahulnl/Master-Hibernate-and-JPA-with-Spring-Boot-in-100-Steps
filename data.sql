@@ -5,7 +5,9 @@ USE jpa_in_depth;
 CREATE TABLE IF NOT EXISTS course (
     id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
-    price DOUBLE
+    price DOUBLE,
+    created_date DATE,
+    updated_date DATE
 );
 
 # INSERT INTO course(id,name) VALUES (10001, 'AWS');
