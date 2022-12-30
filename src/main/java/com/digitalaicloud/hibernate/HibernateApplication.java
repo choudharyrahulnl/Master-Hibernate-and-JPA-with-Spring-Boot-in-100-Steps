@@ -1,6 +1,5 @@
 package com.digitalaicloud.hibernate;
 
-import com.digitalaicloud.hibernate.entity.Course;
 import com.digitalaicloud.hibernate.repository.CourseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -25,10 +24,10 @@ public class HibernateApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 
-		Course azure = Course.builder().name("AZURE").price(499.00).build();
-		Course aws = Course.builder().name("AWS").price(499.00).build();
-		courseRepository.saveOrUpdate(azure);
-		courseRepository.saveOrUpdate(aws);
+//		Course azure = Course.builder().name("AZURE").price(499.00).build();
+//		Course aws = Course.builder().name("AWS").price(499.00).build();
+//		courseRepository.saveOrUpdate(azure);
+//		courseRepository.saveOrUpdate(aws);
 
 
 //		log.info("Adding new Course -> {}", courseRepository.saveOrUpdate(Course.builder().name("AWS").build()));
@@ -51,7 +50,7 @@ public class HibernateApplication implements CommandLineRunner {
 //		courseRepository.jpqlNamedQuery();
 //		courseRepository.jpqlNativeQuery();
 //		courseRepository.jpqlNativeQueryNamedParam();
-		courseRepository.jpqlNativeQueryUpdate();
+//		courseRepository.jpqlNativeQueryUpdate();
 	}
 
 

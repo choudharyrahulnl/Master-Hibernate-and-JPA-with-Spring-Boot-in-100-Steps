@@ -15,12 +15,13 @@ import java.time.Instant;
 @Builder
 @Getter
 @Setter
-@ToString(of = {"id","name","price"})
+//@ToString(of = {"id","name", "price"})
+@ToString(of = {"id","name"})
 @EqualsAndHashCode(of = {"id"})
 // NAMED QUERIES
-@NamedQueries(value = {
-        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
-})
+//@NamedQueries(value = {
+//        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
+//})
 
 public class Course {
 
@@ -32,14 +33,15 @@ public class Course {
     // @Setter(value=AccessLevel.NONE) // WE CAN'T SET/CHANGE COURSE
     // updatable = false: If we try to update this variable it won't work
     // if we try to update this along with other variable like price then only price will update
-    @Column(name = "name", nullable = false, unique = true, updatable = false)
+    // @Column(name = "name", nullable = false, unique = true, updatable = false)
+    @Column(name = "name", nullable = false)
     private String name; // COLUMN
 
     // insertable = false when we insert new row this filed will not be inserted it will be null
     // updatable = true by default so on update this field will get its value
-    //@Column(name = "price", insertable = false)
-    @Column(name = "price")
-    private Double price;
+    // @Column(name = "price", insertable = false)
+    // @Column(name = "price")
+    // private Double price;
 
     @CreationTimestamp
     private Instant createdDate;
