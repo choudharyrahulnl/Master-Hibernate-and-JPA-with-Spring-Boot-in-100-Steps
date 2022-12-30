@@ -34,7 +34,7 @@ public class Course {
     // updatable = false: If we try to update this variable it won't work
     // if we try to update this along with other variable like price then only price will update
     // @Column(name = "name", nullable = false, unique = true, updatable = false)
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name; // COLUMN
 
     // insertable = false when we insert new row this filed will not be inserted it will be null
