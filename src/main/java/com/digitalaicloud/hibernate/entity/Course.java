@@ -15,10 +15,13 @@ import java.time.Instant;
 @Builder
 @Getter
 @Setter
-@ToString(of = {"id","name","price"})
+@ToString(of = {"id","name","price","createdDate","updatedDate"})
 @EqualsAndHashCode(of = {"id"})
-// NAMED QUERY
-@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
+// NAMED QUERIES
+@NamedQueries(value = {
+        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
+})
+
 public class Course {
 
     @Id // PRIMARY KEY
