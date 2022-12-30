@@ -40,3 +40,12 @@ CREATE TABLE IF NOT EXISTS passport (
 INSERT INTO passport(number) VALUES ('E5234');
 INSERT INTO passport(number) VALUES ('T4253');
 INSERT INTO passport(number) VALUES ('K8426');
+
+
+CREATE TABLE IF NOT EXISTS review (
+    id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    description VARCHAR(255)
+);
+INSERT INTO review(description) VALUES ('5 Star');
+INSERT INTO review(description) VALUES ('3 Star');
+INSERT INTO review(description) VALUES ('4 Star');
