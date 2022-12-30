@@ -1,13 +1,19 @@
 package com.digitalaicloud.hibernate.repository;
 
 import com.digitalaicloud.hibernate.entity.Course;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional // IF WE CHANGE DATA WE NEED @TRANSACTIONAL EX INSERT/UPDATE/DELETE
+@Slf4j
 public class CourseRepository {
 
     private EntityManager entityManager;
@@ -21,7 +27,7 @@ public class CourseRepository {
     }
 
     public Course saveOrUpdate(Course course) {
-        if(course.getId() == null) {
+        if (course.getId() == null) {
             entityManager.persist(course);
         } else {
             entityManager.merge(course);
@@ -45,7 +51,6 @@ public class CourseRepository {
         // EntityManager is keeping track of object azure, when we update azure object using setter
         // EntityManager will do dirty checking and find difference and make db call to update
         azure.setName("Azure-Updated");
-
 
 
         Course aws = Course.builder().name("AWS").build();
@@ -80,5 +85,23 @@ public class CourseRepository {
         entityManager.persist(azure);
 
         azure.setName("Azure-Updated!!");
+    }
+
+    public void jpqlQuery() {
+        Query query = entityManager.createQuery("FROM Course c");
+        List resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlTypedQuery() {
+        TypedQuery<Course> query = entityManager.createQuery("FROM Course c", Course.class);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlNamedQuery() {
+        TypedQuery<Course> query = entityManager.createNamedQuery("query_get_all_courses", Course.class);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
     }
 }

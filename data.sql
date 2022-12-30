@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS course (
     updated_date DATE
 );
 
-# INSERT INTO course(id,name) VALUES (10001, 'AWS');
+INSERT INTO course(name,price,created_date,updated_date) VALUES ('AWS',499.00,NOW(),NOW());

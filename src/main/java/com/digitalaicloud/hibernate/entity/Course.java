@@ -9,12 +9,16 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.Instant;
 
 @Entity
+@Table(name = "course")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 @Setter
-@ToString
+@ToString(of = {"id","name","price"})
+@EqualsAndHashCode(of = {"id"})
+// NAMED QUERY
+@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
 public class Course {
 
     @Id // PRIMARY KEY
@@ -30,7 +34,8 @@ public class Course {
 
     // insertable = false when we insert new row this filed will not be inserted it will be null
     // updatable = true by default so on update this field will get its value
-    @Column(name = "price", insertable = false)
+    //@Column(name = "price", insertable = false)
+    @Column(name = "price")
     private Double price;
 
     @CreationTimestamp
