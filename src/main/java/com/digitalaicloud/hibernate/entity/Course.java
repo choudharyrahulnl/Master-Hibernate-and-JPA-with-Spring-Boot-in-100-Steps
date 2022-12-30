@@ -15,7 +15,7 @@ import java.time.Instant;
 @Builder
 @Getter
 @Setter
-@ToString(of = {"id","name","price","createdDate","updatedDate"})
+@ToString(of = {"id","name","price"})
 @EqualsAndHashCode(of = {"id"})
 // NAMED QUERIES
 @NamedQueries(value = {

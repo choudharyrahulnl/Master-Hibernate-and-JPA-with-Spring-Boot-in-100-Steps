@@ -104,4 +104,24 @@ public class CourseRepository {
         List<Course> resultList = query.getResultList();
         log.info(resultList.toString());
     }
+
+    public void jpqlNativeQuery() {
+        Query query = entityManager.createNativeQuery("SELECT * FROM course c WHERE c.price = ?", Course.class);
+        query.setParameter(1, 499.00);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlNativeQueryNamedParam() {
+        Query query = entityManager.createNativeQuery("SELECT * FROM course c WHERE c.price = :price", Course.class);
+        query.setParameter("price", 499.00);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlNativeQueryUpdate() {
+        Query query = entityManager.createNativeQuery("UPDATE course SET updated_date = sysdate()", Course.class);
+        int noOfRowsUpdated = query.executeUpdate();
+        log.info(String.valueOf(noOfRowsUpdated));
+    }
 }
