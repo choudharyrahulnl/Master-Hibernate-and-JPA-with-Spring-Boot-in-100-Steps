@@ -21,4 +21,6 @@ public class Passport {
 
     @Column(name = "number", nullable = false, unique = true)
     private String number;
+
+    
 }

@@ -21,4 +21,7 @@ public class Student {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Passport passport;
 }
