@@ -3,6 +3,9 @@ package com.digitalaicloud.hibernate.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "review")
 @NoArgsConstructor
@@ -24,4 +27,7 @@ public class Review {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne
+    private Course course;
 }

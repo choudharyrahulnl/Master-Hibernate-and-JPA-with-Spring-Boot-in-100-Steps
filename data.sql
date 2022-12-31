@@ -31,10 +31,10 @@ INSERT INTO course(name,created_date,updated_date) VALUES ('Angular',SYSDATE(),S
 
 DROP TABLE IF EXISTS passport;
 CREATE TABLE IF NOT EXISTS passport (
-                                        id INTEGER NOT NULL AUTO_INCREMENT,
-                                        number VARCHAR(255),
-                                        PRIMARY KEY (`id`),
-                                        UNIQUE KEY `UK_number` (`number`)
+      id INTEGER NOT NULL AUTO_INCREMENT,
+      number VARCHAR(255),
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `UK_number` (`number`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
 INSERT INTO passport(number) VALUES ('E5234');
 INSERT INTO passport(number) VALUES ('T4253');
@@ -62,11 +62,14 @@ CREATE TABLE IF NOT EXISTS review (
     id INTEGER NOT NULL AUTO_INCREMENT,
     rating VARCHAR(255),
     description VARCHAR(255),
-    PRIMARY KEY (`id`)
+    course_id INTEGER,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `FK_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
-INSERT INTO review(rating,description) VALUES ('5','Great Course');
-INSERT INTO review(rating,description) VALUES ('3','Nice Course');
-INSERT INTO review(rating,description) VALUES ('4','Good Course');
+INSERT INTO review(rating,description,course_id) VALUES ('5','Great Course',1);
+INSERT INTO review(rating,description,course_id) VALUES ('3','Nice Course',2);
+INSERT INTO review(rating,description,course_id) VALUES ('4','Good Course',3);
+INSERT INTO review(rating,description,course_id) VALUES ('5','Awesome Course',1);
 
 
 SET FOREIGN_KEY_CHECKS=1;

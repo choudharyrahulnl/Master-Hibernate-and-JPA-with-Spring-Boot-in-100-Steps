@@ -1,9 +1,12 @@
 package com.digitalaicloud.hibernate;
 
-import com.digitalaicloud.hibernate.entity.Passport;
-import com.digitalaicloud.hibernate.entity.Student;
+import com.digitalaicloud.hibernate.entity.Course;
+import com.digitalaicloud.hibernate.entity.Review;
+import com.digitalaicloud.hibernate.repository.CourseRepository;
 import com.digitalaicloud.hibernate.repository.CourseRepositoryDemo;
+import com.digitalaicloud.hibernate.repository.ReviewRepository;
 import com.digitalaicloud.hibernate.services.PassportService;
+import com.digitalaicloud.hibernate.services.ReviewService;
 import com.digitalaicloud.hibernate.services.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -11,20 +14,30 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @Slf4j
 @SpringBootApplication
 public class HibernateApplication implements CommandLineRunner {
+	private final ReviewRepository reviewRepository;
+	private final CourseRepository courseRepository;
 
 	private final CourseRepositoryDemo courseRepositoryDemo;
 	private final StudentService studentService;
 	private final PassportService passportService;
+	private final ReviewService reviewService;
 
 
-	public HibernateApplication(CourseRepositoryDemo courseRepositoryDemo, StudentService studentService, PassportService passportService) {
+	public HibernateApplication(CourseRepositoryDemo courseRepositoryDemo, StudentService studentService, PassportService passportService,
+								CourseRepository courseRepository,
+								ReviewRepository reviewRepository, ReviewService reviewService) {
 		this.courseRepositoryDemo = courseRepositoryDemo;
 		this.studentService = studentService;
 		this.passportService = passportService;
+		this.courseRepository = courseRepository;
+		this.reviewRepository = reviewRepository;
+		this.reviewService = reviewService;
 	}
 
 	public static void main(String[] args) {
@@ -112,7 +125,49 @@ public class HibernateApplication implements CommandLineRunner {
 //		log.info(student.toString());
 //		log.info(student.getPassport().toString());
 
+		/**
+		 * ONE TO ONE BIDIRECTIONAL
+		 * fetching student using passport
+		 */
+//		Passport byId = passportService.findById(1L);
+//		log.info(byId.toString());
+//		log.info(byId.getStudent().toString());
 
+		/**
+		 * ONE TO MANY    AND    MANY TO ONE
+		 * Save Reviews for a Course
+		 */
+//		// fetch course
+//		Optional<Course> byId = courseRepository.findById(1l);
+//		Course course = byId.get();
+//		log.info(course.toString());
+//		log.info(course.getReviews().toString());
+//
+//		// create reviews or get from ui
+//		Review review1 = Review.builder().rating("5").description("Wonderful Course").course(course).build();
+//		Review review2 = Review.builder().rating("5").description("Love this Course").course(course).build();
+//
+//		// set reviews on course using convenient method we created
+//		byId.get().addReview(review1);
+//		byId.get().addReview(review2);
+//
+//		// review is the owning side of the relationship, we need to tell which course to it
+//		review1.setCourse(course);
+//		review2.setCourse(course);
+//
+//		// save to db, we are not doing anything on course so we will only persist reviews
+//		reviewService.save(review1);
+//		reviewService.save(review2);
+
+		/**
+		 * Fetching Course which has @OneToMany
+		 * It will fetch in Lazy fashion as @OneToMany is Lazy by default
+		 * Only when we call getReviews on Course then only it will fetch reviews
+		 *
+		 * Fetching Reviews which has @ManyToOne
+		 * It will fetch in Eager fashion as @ManyToOne is Eager by default
+		 * That means it will fetch Course with Reviews
+		 */
 
 
 	}

@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -56,4 +58,14 @@ public class Course {
     @UpdateTimestamp
     private Instant updatedDate;
 
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews = new ArrayList<>();
+
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+    }
 }
