@@ -73,6 +73,9 @@ public class Course {
     }
 
     public void addStudent(Student student) {
+        if(this.students == null) {
+            this.students = new ArrayList<>();
+        }
         this.students.add(student);
     }
 

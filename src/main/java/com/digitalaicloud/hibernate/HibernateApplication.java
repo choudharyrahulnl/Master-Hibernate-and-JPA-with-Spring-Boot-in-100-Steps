@@ -172,15 +172,32 @@ public class HibernateApplication implements CommandLineRunner {
 
 
 		/**
-		 * Many To Many
+		 * Many To Many Fetch
 		 */
 //		Course course = courseService.findById(1L);
 //		log.info(course.toString());
 //		log.info(course.getStudents().toString());
 
-		Student student = studentService.findById(1L);
-		log.info(student.toString());
-		log.info(student.getCourses().toString());
+//		Student student = studentService.findById(1L);
+//		log.info(student.toString());
+//		log.info(student.getCourses().toString());
+
+
+		/**
+		 * Many To Many Insert
+		 */
+		Student student = Student.builder().name("Kuldeep Baswan").build();
+		studentService.save(student);
+
+		Course course = Course.builder().name("Microservices").build();
+		courseService.save(course);
+
+		// create relationship
+		course.addStudent(student);
+		student.addCourse(course);
+
+		// save the owning side
+		studentService.save(student);
 
 	}
 

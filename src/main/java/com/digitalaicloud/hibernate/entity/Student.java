@@ -36,6 +36,9 @@ public class Student {
     private List<Course> courses = new ArrayList<>();
 
     public void addCourse(Course course) {
+        if(this.courses == null) {
+            this.courses = new ArrayList<>();
+        }
         this.courses.add(course);
     }
 

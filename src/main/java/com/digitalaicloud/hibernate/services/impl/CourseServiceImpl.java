@@ -29,4 +29,9 @@ public class CourseServiceImpl implements CourseService {
         }
         return byId.get();
     }
+
+    @Override
+    public Course save(Course course) {
+        return courseRepository.save(course);
+    }
 }
