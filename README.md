@@ -49,5 +49,13 @@ Github: https://github.com/in28minutes/jpa-with-hibernate
 	<li> Fetching Reviews which has @ManyToOne</li>
 	<li> It will fetch in Eager fashion as @ManyToOne is Eager by default</li>
 	<li> That means it will fetch Course with Reviews</li>
+</ul>
+
+
+<h3>Many To Many Mapping: </h3>
+<ul>
+    <li>Course & Students are having Many To Many Relationship</li>
+    <li></li>
+    <li></li>
     <li></li>
 </ul>
