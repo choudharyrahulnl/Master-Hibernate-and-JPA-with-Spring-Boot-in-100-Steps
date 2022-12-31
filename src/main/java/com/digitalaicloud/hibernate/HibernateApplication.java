@@ -1,10 +1,11 @@
 package com.digitalaicloud.hibernate;
 
 import com.digitalaicloud.hibernate.entity.Course;
-import com.digitalaicloud.hibernate.entity.Review;
+import com.digitalaicloud.hibernate.entity.Student;
 import com.digitalaicloud.hibernate.repository.CourseRepository;
 import com.digitalaicloud.hibernate.repository.CourseRepositoryDemo;
 import com.digitalaicloud.hibernate.repository.ReviewRepository;
+import com.digitalaicloud.hibernate.services.CourseService;
 import com.digitalaicloud.hibernate.services.PassportService;
 import com.digitalaicloud.hibernate.services.ReviewService;
 import com.digitalaicloud.hibernate.services.StudentService;
@@ -14,30 +15,30 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 
 @Slf4j
 @SpringBootApplication
 public class HibernateApplication implements CommandLineRunner {
 	private final ReviewRepository reviewRepository;
 	private final CourseRepository courseRepository;
-
 	private final CourseRepositoryDemo courseRepositoryDemo;
+
 	private final StudentService studentService;
 	private final PassportService passportService;
 	private final ReviewService reviewService;
+	private final CourseService courseService;
 
 
 	public HibernateApplication(CourseRepositoryDemo courseRepositoryDemo, StudentService studentService, PassportService passportService,
 								CourseRepository courseRepository,
-								ReviewRepository reviewRepository, ReviewService reviewService) {
+								ReviewRepository reviewRepository, ReviewService reviewService, CourseService courseService) {
 		this.courseRepositoryDemo = courseRepositoryDemo;
 		this.studentService = studentService;
 		this.passportService = passportService;
 		this.courseRepository = courseRepository;
 		this.reviewRepository = reviewRepository;
 		this.reviewService = reviewService;
+		this.courseService = courseService;
 	}
 
 	public static void main(String[] args) {
@@ -169,6 +170,17 @@ public class HibernateApplication implements CommandLineRunner {
 		 * That means it will fetch Course with Reviews
 		 */
 
+
+		/**
+		 * Many To Many
+		 */
+//		Course course = courseService.findById(1L);
+//		log.info(course.toString());
+//		log.info(course.getStudents().toString());
+
+		Student student = studentService.findById(1L);
+		log.info(student.toString());
+		log.info(student.getCourses().toString());
 
 	}
 

@@ -61,11 +61,22 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
+
     public void addReview(Review review) {
         reviews.add(review);
     }
 
     public void removeReview(Review review) {
         reviews.remove(review);
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        this.students.add(student);
     }
 }

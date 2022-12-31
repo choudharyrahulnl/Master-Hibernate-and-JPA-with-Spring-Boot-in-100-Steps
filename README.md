@@ -55,6 +55,19 @@ Github: https://github.com/in28minutes/jpa-with-hibernate
 <h3>Many To Many Mapping: </h3>
 <ul>
     <li>Course & Students are having Many To Many Relationship</li>
+    <li>Course can have multiple Students so having student_id in Course Table won't work</li>
+    <li>Student can enroll in multiple Courses so having course_id in Student Table won't work</li>
+    <li>So we need to create Join Table Course_Student having course_id & student_id</li>
+    <li>So the foreign key is in CourseStudent Table</li>
+    <li>If we @ManyToMany on both side then it will create tables student_courses & course_students</li>
+    <li>As Course has Students relation and Student has Courses Relation</li>
+    <li>We don't want this, to fix this we need to make one side as owning side</li>
+    <li>As we are using Join Table, so it does not matter which side is the owning side</li>
+    <li>Lets make the Student as the owning side</li>
+    <li>For this we need to put mappedby on Courses Class - students list</li>
+    <li>Now we will see only one table is created student_courses with students_id & courses_id</li>
+    <li>To rename table and its column we can use @JoinTable on owning side ie Student Class</li>
+    <li></li>
     <li></li>
     <li></li>
     <li></li>

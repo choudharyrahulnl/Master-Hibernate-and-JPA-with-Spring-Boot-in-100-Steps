@@ -57,7 +57,7 @@ INSERT INTO student(name,passport_id) VALUES ('Ravi Baswan',3);
 
 
 
-
+DROP TABLE IF EXISTS review;
 CREATE TABLE IF NOT EXISTS review (
     id INTEGER NOT NULL AUTO_INCREMENT,
     rating VARCHAR(255),
@@ -70,6 +70,21 @@ INSERT INTO review(rating,description,course_id) VALUES ('5','Great Course',1);
 INSERT INTO review(rating,description,course_id) VALUES ('3','Nice Course',2);
 INSERT INTO review(rating,description,course_id) VALUES ('4','Good Course',3);
 INSERT INTO review(rating,description,course_id) VALUES ('5','Awesome Course',1);
+
+
+
+DROP TABLE IF EXISTS student_course;
+CREATE TABLE IF NOT EXISTS student_course (
+    student_id bigint not null,
+    course_id bigint not null,
+    UNIQUE KEY `UK_student_course` (`student_id`,`course_id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO student_course(student_id, course_id) VALUES (1,1);
+INSERT INTO student_course(student_id, course_id) VALUES (2,1);
+INSERT INTO student_course(student_id, course_id) VALUES (3,1);
+INSERT INTO student_course(student_id, course_id) VALUES (2,2);
+INSERT INTO student_course(student_id, course_id) VALUES (3,3);
+INSERT INTO student_course(student_id, course_id) VALUES (1,2);
 
 
 SET FOREIGN_KEY_CHECKS=1;
