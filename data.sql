@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS course (
        updated_date DATE,
        PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
-INSERT INTO course(name,created_date,updated_date) VALUES ('AWS',SYSDATE(),SYSDATE());
+INSERT INTO course(name,created_date,updated_date) VALUES ('AWS Cloud',SYSDATE(),SYSDATE());
 INSERT INTO course(name,created_date,updated_date) VALUES ('Spring Boot',SYSDATE(),SYSDATE());
 INSERT INTO course(name,created_date,updated_date) VALUES ('Angular',SYSDATE(),SYSDATE());
-INSERT INTO course(name,created_date,updated_date) VALUES ('Azure',SYSDATE(),SYSDATE());
+INSERT INTO course(name,created_date,updated_date) VALUES ('Azure Cloud',SYSDATE(),SYSDATE());
 
 
 

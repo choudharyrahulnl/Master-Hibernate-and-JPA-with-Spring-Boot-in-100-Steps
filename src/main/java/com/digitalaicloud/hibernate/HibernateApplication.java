@@ -207,7 +207,16 @@ public class HibernateApplication implements CommandLineRunner {
 //		courseRepositoryDemo.jpqlStudentsWithPassportInACertainPattern();
 //		courseRepositoryDemo.jpqlJoin();
 //		courseRepositoryDemo.jpqlLeftJoin();
-		courseRepositoryDemo.jpqlCrossJoin();
+//		courseRepositoryDemo.jpqlCrossJoin();
+
+		/**
+		 * Criteria Query
+		 */
+//		courseRepositoryDemo.criteriaQuerySelectFromCourse();
+//		courseRepositoryDemo.criteriaQueryCourseNameLike();
+//		courseRepositoryDemo.criteriaQueryCoursesWithoutStudent();
+//		courseRepositoryDemo.criteriaQueryCourseAndStudentJoin();
+		courseRepositoryDemo.criteriaQueryCourseAndStudentLeftJoin();
 
 	}
 
