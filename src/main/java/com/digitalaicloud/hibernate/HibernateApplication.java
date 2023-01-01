@@ -1,7 +1,5 @@
 package com.digitalaicloud.hibernate;
 
-import com.digitalaicloud.hibernate.entity.Course;
-import com.digitalaicloud.hibernate.entity.Student;
 import com.digitalaicloud.hibernate.repository.CourseRepository;
 import com.digitalaicloud.hibernate.repository.CourseRepositoryDemo;
 import com.digitalaicloud.hibernate.repository.ReviewRepository;
@@ -63,19 +61,19 @@ public class HibernateApplication implements CommandLineRunner {
 //		log.info("Update AWS to AWS Cloud -> {}", courseRepository.saveOrUpdate(byId));
 
 //		log.info("Delete Course with is 1 ");
-//		courseRepository.deleteById(1L);
+//		courseRepositoryDemo.deleteById(1L);
 
-//		courseRepository.playWithEntityManager();
+//		courseRepositoryDemo.playWithEntityManager();
 
-//		courseRepository.playWithEntityManagerInsertFalse();
-//		courseRepository.playWithEntityManagerUpdateFalse();
+//		courseRepositoryDemo.playWithEntityManagerInsertFalse();
+//		courseRepositoryDemo.playWithEntityManagerUpdateFalse();
 
-//		courseRepository.jpqlQuery();
-//		courseRepository.jpqlTypedQuery();
-//		courseRepository.jpqlNamedQuery();
-//		courseRepository.jpqlNativeQuery();
-//		courseRepository.jpqlNativeQueryNamedParam();
-//		courseRepository.jpqlNativeQueryUpdate();
+//		courseRepositoryDemo.jpqlQuery();
+//		courseRepositoryDemo.jpqlTypedQuery();
+//		courseRepositoryDemo.jpqlNamedQuery();
+//		courseRepositoryDemo.jpqlNativeQuery();
+//		courseRepositoryDemo.jpqlNativeQueryNamedParam();
+//		courseRepositoryDemo.jpqlNativeQueryUpdate();
 
 
 		/**
@@ -186,18 +184,30 @@ public class HibernateApplication implements CommandLineRunner {
 		/**
 		 * Many To Many Insert
 		 */
-		Student student = Student.builder().name("Kuldeep Baswan").build();
-		studentService.save(student);
+//		Student student = Student.builder().name("Kuldeep Baswan").build();
+//		studentService.save(student);
+//
+//		Course course = Course.builder().name("Microservices").build();
+//		courseService.save(course);
+//
+//		// create relationship
+//		course.addStudent(student);
+//		student.addCourse(course);
+//
+//		// save the owning side
+//		studentService.save(student);
 
-		Course course = Course.builder().name("Microservices").build();
-		courseService.save(course);
 
-		// create relationship
-		course.addStudent(student);
-		student.addCourse(course);
-
-		// save the owning side
-		studentService.save(student);
+		/**
+		 * Use Hibernate Relation in JPQL
+		 */
+//		courseRepositoryDemo.jpqlCoursesWithoutStudent();
+//		courseRepositoryDemo.jpqlCoursesWithAtLeastTwoStudent();
+//		courseRepositoryDemo.jpqlCoursesOrderByStudentSize();
+//		courseRepositoryDemo.jpqlStudentsWithPassportInACertainPattern();
+//		courseRepositoryDemo.jpqlJoin();
+//		courseRepositoryDemo.jpqlLeftJoin();
+		courseRepositoryDemo.jpqlCrossJoin();
 
 	}
 

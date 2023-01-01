@@ -1,11 +1,16 @@
 package com.digitalaicloud.hibernate.repository;
 
 import com.digitalaicloud.hibernate.entity.Course;
+import com.digitalaicloud.hibernate.entity.Student;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+
+import java.util.List;
 
 
 @Repository
@@ -121,4 +126,54 @@ public class CourseRepositoryDemo {
 //        int noOfRowsUpdated = query.executeUpdate();
 //        log.info(String.valueOf(noOfRowsUpdated));
 //    }
+
+    public void jpqlCoursesWithoutStudent() {
+        Query query = entityManager.createQuery("select c from Course c where c.students is empty", Course.class);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+
+    public void jpqlCoursesWithAtLeastTwoStudent() {
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c where size(c.students) >= 2", Course.class);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlCoursesOrderByStudentSize() {
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c order by size(c.students) desc", Course.class);
+        List<Course> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlStudentsWithPassportInACertainPattern() {
+        TypedQuery<Student> query = entityManager.createQuery("select s from Student s where s.passport.number like '%42%'", Student.class);
+        List<Student> resultList = query.getResultList();
+        log.info(resultList.toString());
+    }
+
+    public void jpqlJoin() {
+        Query query = entityManager.createQuery("select c,s from Course c JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+        for (Object[] result: resultList) {
+            log.info("Course {} Student {}",result[0], result[1]);
+        }
+    }
+
+    public void jpqlLeftJoin() {
+        Query query = entityManager.createQuery("select c,s from Course c LEFT JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+        for (Object[] result: resultList) {
+            log.info("Course {} Student {}",result[0], result[1]);
+        }
+    }
+
+    public void jpqlCrossJoin() {
+        Query query = entityManager.createQuery("select c,s from Course c, Student s");
+        List<Object[]> resultList = query.getResultList();
+        for (Object[] result: resultList) {
+            log.info("Course {} Student {}",result[0], result[1]);
+        }
+    }
 }
+

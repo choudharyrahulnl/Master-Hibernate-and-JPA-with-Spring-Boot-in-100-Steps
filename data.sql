@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS course (
 INSERT INTO course(name,created_date,updated_date) VALUES ('AWS',SYSDATE(),SYSDATE());
 INSERT INTO course(name,created_date,updated_date) VALUES ('Spring Boot',SYSDATE(),SYSDATE());
 INSERT INTO course(name,created_date,updated_date) VALUES ('Angular',SYSDATE(),SYSDATE());
+INSERT INTO course(name,created_date,updated_date) VALUES ('Azure',SYSDATE(),SYSDATE());
 
 
 
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS passport (
 INSERT INTO passport(number) VALUES ('E5234');
 INSERT INTO passport(number) VALUES ('T4253');
 INSERT INTO passport(number) VALUES ('K8426');
+INSERT INTO passport(number) VALUES ('S1423');
 
 
 
@@ -54,6 +56,7 @@ CREATE TABLE IF NOT EXISTS student (
 INSERT INTO student(name,passport_id) VALUES ('Rahul Choudhary',1);
 INSERT INTO student(name,passport_id) VALUES ('Shalu Baliyan',2);
 INSERT INTO student(name,passport_id) VALUES ('Ravi Baswan',3);
+INSERT INTO student(name,passport_id) VALUES ('Vignesh Laxman',4);
 
 
 
