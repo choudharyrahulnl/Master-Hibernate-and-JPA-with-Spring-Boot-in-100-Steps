@@ -1,12 +1,12 @@
 package com.digitalaicloud.hibernate;
 
-import com.digitalaicloud.hibernate.repository.CourseRepository;
-import com.digitalaicloud.hibernate.repository.CourseRepositoryDemo;
-import com.digitalaicloud.hibernate.repository.ReviewRepository;
-import com.digitalaicloud.hibernate.services.CourseService;
-import com.digitalaicloud.hibernate.services.PassportService;
-import com.digitalaicloud.hibernate.services.ReviewService;
-import com.digitalaicloud.hibernate.services.StudentService;
+//import com.digitalaicloud.hibernate.repository.CourseRepository;
+//import com.digitalaicloud.hibernate.repository.CourseRepositoryDemo;
+//import com.digitalaicloud.hibernate.repository.ReviewRepository;
+//import com.digitalaicloud.hibernate.services.CourseService;
+//import com.digitalaicloud.hibernate.services.PassportService;
+//import com.digitalaicloud.hibernate.services.ReviewService;
+//import com.digitalaicloud.hibernate.services.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,27 +17,27 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @SpringBootApplication
 public class HibernateApplication implements CommandLineRunner {
-	private final ReviewRepository reviewRepository;
-	private final CourseRepository courseRepository;
-	private final CourseRepositoryDemo courseRepositoryDemo;
+//	private final ReviewRepository reviewRepository;
+//	private final CourseRepository courseRepository;
+//	private final CourseRepositoryDemo courseRepositoryDemo;
+//
+//	private final StudentService studentService;
+//	private final PassportService passportService;
+//	private final ReviewService reviewService;
+//	private final CourseService courseService;
 
-	private final StudentService studentService;
-	private final PassportService passportService;
-	private final ReviewService reviewService;
-	private final CourseService courseService;
 
-
-	public HibernateApplication(CourseRepositoryDemo courseRepositoryDemo, StudentService studentService, PassportService passportService,
-								CourseRepository courseRepository,
-								ReviewRepository reviewRepository, ReviewService reviewService, CourseService courseService) {
-		this.courseRepositoryDemo = courseRepositoryDemo;
-		this.studentService = studentService;
-		this.passportService = passportService;
-		this.courseRepository = courseRepository;
-		this.reviewRepository = reviewRepository;
-		this.reviewService = reviewService;
-		this.courseService = courseService;
-	}
+//	public HibernateApplication(CourseRepositoryDemo courseRepositoryDemo, StudentService studentService, PassportService passportService,
+//								CourseRepository courseRepository,
+//								ReviewRepository reviewRepository, ReviewService reviewService, CourseService courseService) {
+//		this.courseRepositoryDemo = courseRepositoryDemo;
+//		this.studentService = studentService;
+//		this.passportService = passportService;
+//		this.courseRepository = courseRepository;
+//		this.reviewRepository = reviewRepository;
+//		this.reviewService = reviewService;
+//		this.courseService = courseService;
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateApplication.class, args);

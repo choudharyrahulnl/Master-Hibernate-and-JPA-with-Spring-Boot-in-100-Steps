@@ -13,6 +13,9 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
 
     Optional<Course> findByName(String name);
 
-    @Query(name = "query_get_all_courses")
-    List<Course> findAllCourse();
+//    @Query(name = "query_get_all_courses")
+//    List<Course> findAllCourse();
+
+
+    Optional<Course> findById(Long id);
 }

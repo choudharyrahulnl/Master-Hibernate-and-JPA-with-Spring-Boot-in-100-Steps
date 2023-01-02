@@ -28,7 +28,7 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")

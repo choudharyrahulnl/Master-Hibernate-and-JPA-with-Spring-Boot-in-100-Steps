@@ -306,9 +306,9 @@ public class CourseRepositoryDemo {
         log.info(azure.toString());
     }
 
-    public void jpaNamedQuery() {
-        List<Course> allCourse = courseRepository.findAllCourse();
-        log.info(allCourse.toString());
-    }
+//    public void jpaNamedQuery() {
+//        List<Course> allCourse = courseRepository.findAllCourse();
+//        log.info(allCourse.toString());
+//    }
 }
 

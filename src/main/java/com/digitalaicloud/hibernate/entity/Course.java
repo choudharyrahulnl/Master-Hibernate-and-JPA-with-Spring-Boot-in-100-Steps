@@ -21,10 +21,10 @@ import java.util.List;
 @ToString(of = {"id","name"})
 @EqualsAndHashCode(of = {"id"})
 // NAMED QUERIES
-@NamedQueries(value = {
-        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
-})
-
+//@NamedQueries(value = {
+//        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
+//})
+@Cacheable
 public class Course {
 
     // @Id // PRIMARY KEY
@@ -58,11 +58,11 @@ public class Course {
     @UpdateTimestamp
     private Instant updatedDate;
 
-    @OneToMany(mappedBy = "course")
-    private List<Review> reviews = new ArrayList<>();
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private List<Review> reviews;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Student> students = new ArrayList<>();
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    private List<Student> students;
 
     public void addReview(Review review) {
         reviews.add(review);
