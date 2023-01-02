@@ -119,5 +119,10 @@ Github: https://github.com/in28minutes/jpa-with-hibernate
     <li>Hibernate: spring.jpa.properties.hibernate.connection.isolation=4 for Repeatable Read & 8 for Serializable & 2 for Read Committed</li>
 </ul>
 
-
+<h3>Performance: </h3>
+<ul>
+    <li>Create Indexes - using which most search query are fired</li>
+    <li>Use Cache - second level cache or distributed cache like redis, hazelcast, apache ignite</li>
+    <li>Lazy Fetch</li>
+</ul>
 

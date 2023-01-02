@@ -1,5 +1,6 @@
 package com.digitalaicloud.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -71,9 +72,11 @@ public class Course {
     }
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Review> reviews;
 
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Student> students;
 
     public void addReview(Review review) {
