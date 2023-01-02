@@ -58,10 +58,10 @@ public class Course {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @CreationTimestamp
-    private Instant createdDate;
-    @UpdateTimestamp
-    private Instant updatedDate;
+//    @CreationTimestamp
+//    private Instant createdDate;
+//    @UpdateTimestamp
+//    private Instant updatedDate;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
