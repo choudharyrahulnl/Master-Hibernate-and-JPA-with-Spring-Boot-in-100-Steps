@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS course (
        name VARCHAR(255),
        created_date DATE,
        updated_date DATE,
+       is_deleted boolean DEFAULT FALSE,
        PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
 INSERT INTO course(name,created_date,updated_date) VALUES ('AWS Cloud',SYSDATE(),SYSDATE());

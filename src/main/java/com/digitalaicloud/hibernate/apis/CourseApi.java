@@ -5,10 +5,7 @@ import com.digitalaicloud.hibernate.services.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,12 @@ public class CourseApi {
         Course byId = courseService.findById(id);
         log.info(byId.toString());
         return new ResponseEntity<>(byId, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+        courseService.deleteById(id);
+        return new ResponseEntity<>("Successfully", HttpStatus.OK);
     }
 
     @GetMapping()

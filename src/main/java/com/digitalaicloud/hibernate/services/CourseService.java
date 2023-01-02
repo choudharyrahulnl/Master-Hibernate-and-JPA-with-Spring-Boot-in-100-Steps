@@ -10,4 +10,6 @@ public interface CourseService {
     Course save(Course course);
 
     List<Course> findAll();
+
+    void deleteById(Long id);
 }

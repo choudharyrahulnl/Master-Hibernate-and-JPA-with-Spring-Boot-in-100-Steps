@@ -36,4 +36,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findAll() {
         return courseRepository.findAll();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        courseRepository.deleteById(id);
+    }
 }
