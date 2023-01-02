@@ -67,8 +67,50 @@ Github: https://github.com/in28minutes/jpa-with-hibernate
     <li>For this we need to put mappedby on Courses Class - students list</li>
     <li>Now we will see only one table is created student_courses with students_id & courses_id</li>
     <li>To rename table and its column we can use @JoinTable on owning side ie Student Class</li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
 </ul>
+
+
+<h3>Transaction: </h3>
+<ul>
+    <li>A: Atomicity - Either all of them should be successful or none of them</li>
+    <li>C: Consistency -  Maintain consistent state weather transaction is successful or failed. Ex Transfer some amount form A to B account if successful then amount should be deducted if failed then not</li>
+    <li>I: Isolation - Transaction should be in isolation if A transfer some money using ATM and Bank then both transaction should be in isolation </li>
+    <li>D: Durability - Once transaction is committed data should be persisted weather System crashes or not</li>
+</ul>
+
+<h3>Dirty Read: </h3>
+<ul>
+    <li>If 2 Transaction are happening in parallel and one transaction read value from other transaction</li>
+    <li>Before other transaction is successful or failed</li>
+    <li>This lead to in-consistency of data</li>
+    <li>Scenario if transaction one failed and other transaction is successful, in this case transaction one will roll back but other transaction has already read the dirty data from transaction one change</li>
+</ul>
+
+<h3>Non Repeatable Read: </h3>
+<ul>
+    <li>If 2 Transaction are happening in parallel</li>
+    <li>First transaction read some value</li>
+    <li>Second Transaction updated some value</li>
+    <li>Again first transaction read same value but will get different data</li>
+    <li>Within same transaction we get different data</li>
+</ul>
+
+
+<h3>Phantom Read: </h3>
+<ul>
+    <li>Same as Non-Repeatable read but in this case we will insert data using other transaction</li>
+    <li>So we will get different no of rows in same transaction</li>
+</ul>
+
+
+<h3>Isolation Levels: </h3>
+<ul>
+    <li>Read Uncommitted: Solves nothing </li>
+    <li>Read Committed: Solves Dirty Read </li>
+    <li>Repeatable Read: Solves Dirty Read & Non-Repeatable Read (Row is Locked)</li>
+    <li>Serializable: Solves Dirty Read & Non-Repeatable Read & Phantom Read (Table Lock for the where constraint), if we read a table using select * from table then all other transaction will wait</li>
+</ul>
+
+Note: 
+Read Committed is used by most of the application
+MySQL has default isolation level of REPEATABLE READ
