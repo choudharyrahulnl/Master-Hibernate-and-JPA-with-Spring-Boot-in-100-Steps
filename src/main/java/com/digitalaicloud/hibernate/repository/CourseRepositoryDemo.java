@@ -1,42 +1,42 @@
 package com.digitalaicloud.hibernate.repository;
 
-import com.digitalaicloud.hibernate.entity.Course;
-import com.digitalaicloud.hibernate.entity.Student;
-import com.digitalaicloud.hibernate.exceptions.NotFoundException;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.*;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
+//import com.digitalaicloud.hibernate.entity.Course;
+//import com.digitalaicloud.hibernate.entity.Student;
+//import com.digitalaicloud.hibernate.exceptions.NotFoundException;
+//import jakarta.persistence.Query;
+//import jakarta.persistence.TypedQuery;
+//import jakarta.persistence.criteria.*;
+//import lombok.extern.slf4j.Slf4j;
+//import org.springframework.data.crossstore.ChangeSetPersister;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Sort;
+//import org.springframework.stereotype.Repository;
+//
+//import jakarta.persistence.EntityManager;
+//import org.springframework.transaction.annotation.Isolation;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//import java.util.List;
+//import java.util.Optional;
 
-import jakarta.persistence.EntityManager;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
-
-@Repository
-@Transactional(isolation = Isolation.REPEATABLE_READ) // IF WE CHANGE DATA WE NEED @TRANSACTIONAL EX INSERT/UPDATE/DELETE
-@Slf4j
+//@Repository
+//@Transactional(isolation = Isolation.REPEATABLE_READ) // IF WE CHANGE DATA WE NEED @TRANSACTIONAL EX INSERT/UPDATE/DELETE
+//@Slf4j
 public class CourseRepositoryDemo {
 
-    private EntityManager entityManager;
-    private CourseRepository courseRepository;
-
-    public CourseRepositoryDemo(EntityManager entityManager, CourseRepository courseRepository) {
-        this.entityManager = entityManager;
-        this.courseRepository = courseRepository;
-    }
-
-    public Course findById(Long id) {
-        return entityManager.find(Course.class, id);
-    }
+//    private EntityManager entityManager;
+//    private CourseRepository courseRepository;
+//
+//    public CourseRepositoryDemo(EntityManager entityManager, CourseRepository courseRepository) {
+//        this.entityManager = entityManager;
+//        this.courseRepository = courseRepository;
+//    }
+//
+//    public Course findById(Long id) {
+//        return entityManager.find(Course.class, id);
+//    }
 
 //    public Course saveOrUpdate(Course course) {
 //        if (course.getId() == null) {
@@ -137,174 +137,174 @@ public class CourseRepositoryDemo {
 //        log.info(String.valueOf(noOfRowsUpdated));
 //    }
 
-    public void jpqlCoursesWithoutStudent() {
-        Query query = entityManager.createQuery("select c from Course c where c.students is empty", Course.class);
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-
-    public void jpqlCoursesWithAtLeastTwoStudent() {
-        TypedQuery<Course> query = entityManager.createQuery("select c from Course c where size(c.students) >= 2", Course.class);
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void jpqlCoursesOrderByStudentSize() {
-        TypedQuery<Course> query = entityManager.createQuery("select c from Course c order by size(c.students) desc", Course.class);
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void jpqlStudentsWithPassportInACertainPattern() {
-        TypedQuery<Student> query = entityManager.createQuery("select s from Student s where s.passport.number like '%42%'", Student.class);
-        List<Student> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void jpqlJoin() {
-        Query query = entityManager.createQuery("select c,s from Course c JOIN c.students s");
-        List<Object[]> resultList = query.getResultList();
-        for (Object[] result: resultList) {
-            log.info("Course {} Student {}",result[0], result[1]);
-        }
-    }
-
-    public void jpqlLeftJoin() {
-        Query query = entityManager.createQuery("select c,s from Course c LEFT JOIN c.students s");
-        List<Object[]> resultList = query.getResultList();
-        for (Object[] result: resultList) {
-            log.info("Course {} Student {}",result[0], result[1]);
-        }
-    }
-
-    public void jpqlCrossJoin() {
-        Query query = entityManager.createQuery("select c,s from Course c, Student s");
-        List<Object[]> resultList = query.getResultList();
-        for (Object[] result: resultList) {
-            log.info("Course {} Student {}",result[0], result[1]);
-        }
-    }
-
-    public void criteriaQuerySelectFromCourse() {
-
-        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
-
-        // 2. Define roots for tables which are involved in the query
-        Root<Course> courseRoot = criteriaQuery.from(Course.class);
-
-        // 3. Define Predicates etc. using Criteria Builder
-
-        // 4. Add Predicates etc. to the Criteria Query
-
-        // 5. Build TypedQuery with entity manager & criteria query
-        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void criteriaQueryCourseNameLike() {
-        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
-
-        // 2. Define roots for tables which are involved in the query
-        Root<Course> courseRoot = criteriaQuery.from(Course.class);
-
-        // 3. Define Predicates etc. using Criteria Builder
-        Predicate nameLike = criteriaBuilder.like(courseRoot.get("name"), "%Cloud%");
-
-        // 4. Add Predicates etc. to the Criteria Query
-        criteriaQuery.where(nameLike);
-
-        // 5. Build TypedQuery with entity manager & criteria query
-        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void criteriaQueryCoursesWithoutStudent() {
-        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
-
-        // 2. Define roots for tables which are involved in the query
-        Root<Course> courseRoot = criteriaQuery.from(Course.class);
-
-        // 3. Define Predicates etc. using Criteria Builder
-        Predicate studentsIsEmpty = criteriaBuilder.isEmpty(courseRoot.get("students"));
-
-        // 4. Add Predicates etc. to the Criteria Query
-        criteriaQuery.where(studentsIsEmpty);
-
-        // 5. Build TypedQuery with entity manager & criteria query
-        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void criteriaQueryCourseAndStudentJoin() {
-        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
-
-        // 2. Define roots for tables which are involved in the query
-        Root<Course> courseRoot = criteriaQuery.from(Course.class);
-
-        // 3. Define Predicates etc. using Criteria Builder
-        Join<Object, Object> students = courseRoot.join("students");
-
-        // 4. Add Predicates etc. to the Criteria Query
-
-        // 5. Build TypedQuery with entity manager & criteria query
-        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void criteriaQueryCourseAndStudentLeftJoin() {
-        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
-
-        // 2. Define roots for tables which are involved in the query
-        Root<Course> courseRoot = criteriaQuery.from(Course.class);
-
-        // 3. Define Predicates etc. using Criteria Builder
-        Join<Object, Object> students = courseRoot.join("students", JoinType.LEFT);
-
-        // 4. Add Predicates etc. to the Criteria Query
-
-        // 5. Build TypedQuery with entity manager & criteria query
-        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
-        List<Course> resultList = query.getResultList();
-        log.info(resultList.toString());
-    }
-
-    public void jpaSortDesc() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "name");
-        List<Course> resultList = courseRepository.findAll(sort);
-        log.info(resultList.toString());
-    }
-
-    public void jpaSortsDesc() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "name").and(Sort.by(Sort.Direction.DESC, "createdDate"));
-        List<Course> resultList = courseRepository.findAll(sort);
-        log.info(resultList.toString());
-    }
-
-    public void jpaPagination() {
-        PageRequest pageRequest = PageRequest.of(0,2);
-        Page<Course> resultList = courseRepository.findAll(pageRequest);
-        log.info(resultList.getContent().toString());
-    }
-
-    public void jpaQuerySearchByName() {
-        Course azure = courseRepository.findByName("Azure Cloud").orElseThrow(() -> new NotFoundException("Course not found with name Azure"));
-        log.info(azure.toString());
-    }
+//    public void jpqlCoursesWithoutStudent() {
+//        Query query = entityManager.createQuery("select c from Course c where c.students is empty", Course.class);
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//
+//    public void jpqlCoursesWithAtLeastTwoStudent() {
+//        TypedQuery<Course> query = entityManager.createQuery("select c from Course c where size(c.students) >= 2", Course.class);
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void jpqlCoursesOrderByStudentSize() {
+//        TypedQuery<Course> query = entityManager.createQuery("select c from Course c order by size(c.students) desc", Course.class);
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void jpqlStudentsWithPassportInACertainPattern() {
+//        TypedQuery<Student> query = entityManager.createQuery("select s from Student s where s.passport.number like '%42%'", Student.class);
+//        List<Student> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void jpqlJoin() {
+//        Query query = entityManager.createQuery("select c,s from Course c JOIN c.students s");
+//        List<Object[]> resultList = query.getResultList();
+//        for (Object[] result: resultList) {
+//            log.info("Course {} Student {}",result[0], result[1]);
+//        }
+//    }
+//
+//    public void jpqlLeftJoin() {
+//        Query query = entityManager.createQuery("select c,s from Course c LEFT JOIN c.students s");
+//        List<Object[]> resultList = query.getResultList();
+//        for (Object[] result: resultList) {
+//            log.info("Course {} Student {}",result[0], result[1]);
+//        }
+//    }
+//
+//    public void jpqlCrossJoin() {
+//        Query query = entityManager.createQuery("select c,s from Course c, Student s");
+//        List<Object[]> resultList = query.getResultList();
+//        for (Object[] result: resultList) {
+//            log.info("Course {} Student {}",result[0], result[1]);
+//        }
+//    }
+//
+//    public void criteriaQuerySelectFromCourse() {
+//
+//        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+//
+//        // 2. Define roots for tables which are involved in the query
+//        Root<Course> courseRoot = criteriaQuery.from(Course.class);
+//
+//        // 3. Define Predicates etc. using Criteria Builder
+//
+//        // 4. Add Predicates etc. to the Criteria Query
+//
+//        // 5. Build TypedQuery with entity manager & criteria query
+//        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void criteriaQueryCourseNameLike() {
+//        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+//
+//        // 2. Define roots for tables which are involved in the query
+//        Root<Course> courseRoot = criteriaQuery.from(Course.class);
+//
+//        // 3. Define Predicates etc. using Criteria Builder
+//        Predicate nameLike = criteriaBuilder.like(courseRoot.get("name"), "%Cloud%");
+//
+//        // 4. Add Predicates etc. to the Criteria Query
+//        criteriaQuery.where(nameLike);
+//
+//        // 5. Build TypedQuery with entity manager & criteria query
+//        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void criteriaQueryCoursesWithoutStudent() {
+//        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+//
+//        // 2. Define roots for tables which are involved in the query
+//        Root<Course> courseRoot = criteriaQuery.from(Course.class);
+//
+//        // 3. Define Predicates etc. using Criteria Builder
+//        Predicate studentsIsEmpty = criteriaBuilder.isEmpty(courseRoot.get("students"));
+//
+//        // 4. Add Predicates etc. to the Criteria Query
+//        criteriaQuery.where(studentsIsEmpty);
+//
+//        // 5. Build TypedQuery with entity manager & criteria query
+//        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void criteriaQueryCourseAndStudentJoin() {
+//        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+//
+//        // 2. Define roots for tables which are involved in the query
+//        Root<Course> courseRoot = criteriaQuery.from(Course.class);
+//
+//        // 3. Define Predicates etc. using Criteria Builder
+//        Join<Object, Object> students = courseRoot.join("students");
+//
+//        // 4. Add Predicates etc. to the Criteria Query
+//
+//        // 5. Build TypedQuery with entity manager & criteria query
+//        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void criteriaQueryCourseAndStudentLeftJoin() {
+//        // 1. Use Criteria Builder to create a Criteria Query returning the expected result object
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+//
+//        // 2. Define roots for tables which are involved in the query
+//        Root<Course> courseRoot = criteriaQuery.from(Course.class);
+//
+//        // 3. Define Predicates etc. using Criteria Builder
+//        Join<Object, Object> students = courseRoot.join("students", JoinType.LEFT);
+//
+//        // 4. Add Predicates etc. to the Criteria Query
+//
+//        // 5. Build TypedQuery with entity manager & criteria query
+//        TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
+//        List<Course> resultList = query.getResultList();
+//        log.info(resultList.toString());
+//    }
+//
+//    public void jpaSortDesc() {
+//        Sort sort = Sort.by(Sort.Direction.DESC, "name");
+//        List<Course> resultList = courseRepository.findAll(sort);
+//        log.info(resultList.toString());
+//    }
+//
+//    public void jpaSortsDesc() {
+//        Sort sort = Sort.by(Sort.Direction.DESC, "name").and(Sort.by(Sort.Direction.DESC, "createdDate"));
+//        List<Course> resultList = courseRepository.findAll(sort);
+//        log.info(resultList.toString());
+//    }
+//
+//    public void jpaPagination() {
+//        PageRequest pageRequest = PageRequest.of(0,2);
+//        Page<Course> resultList = courseRepository.findAll(pageRequest);
+//        log.info(resultList.getContent().toString());
+//    }
+//
+//    public void jpaQuerySearchByName() {
+//        Course azure = courseRepository.findByName("Azure Cloud").orElseThrow(() -> new NotFoundException("Course not found with name Azure"));
+//        log.info(azure.toString());
+//    }
 
 //    public void jpaNamedQuery() {
 //        List<Course> allCourse = courseRepository.findAllCourse();

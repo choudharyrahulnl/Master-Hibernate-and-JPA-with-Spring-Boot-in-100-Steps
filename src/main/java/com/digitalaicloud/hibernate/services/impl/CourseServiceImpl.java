@@ -1,7 +1,6 @@
 package com.digitalaicloud.hibernate.services.impl;
 
 import com.digitalaicloud.hibernate.entity.Course;
-import com.digitalaicloud.hibernate.exceptions.NotFoundException;
 import com.digitalaicloud.hibernate.repository.CourseRepository;
 import com.digitalaicloud.hibernate.services.CourseService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +24,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course findById(Long id) {
         Optional<Course> byId = courseRepository.findById(id);
-        if(!byId.isPresent()) {
-            throw new NotFoundException("Course not found for id " + id);
-        }
         return byId.get();
     }
 
