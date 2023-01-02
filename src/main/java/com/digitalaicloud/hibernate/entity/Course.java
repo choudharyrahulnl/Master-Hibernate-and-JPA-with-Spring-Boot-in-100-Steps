@@ -21,9 +21,9 @@ import java.util.List;
 @ToString(of = {"id","name"})
 @EqualsAndHashCode(of = {"id"})
 // NAMED QUERIES
-//@NamedQueries(value = {
-//        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
-//})
+@NamedQueries(value = {
+        @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
+})
 
 public class Course {
 

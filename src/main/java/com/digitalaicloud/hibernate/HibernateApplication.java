@@ -229,6 +229,12 @@ public class HibernateApplication implements CommandLineRunner {
 		 */
 //		courseRepositoryDemo.jpaPagination();
 
+		/**
+		 * Query
+		 */
+//		courseRepositoryDemo.jpaQuerySearchByName();
+//		courseRepositoryDemo.jpaNamedQuery();
+
 	}
 
 

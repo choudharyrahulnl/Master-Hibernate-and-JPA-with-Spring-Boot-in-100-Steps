@@ -2,10 +2,12 @@ package com.digitalaicloud.hibernate.repository;
 
 import com.digitalaicloud.hibernate.entity.Course;
 import com.digitalaicloud.hibernate.entity.Student;
+import com.digitalaicloud.hibernate.exceptions.NotFoundException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -296,6 +299,16 @@ public class CourseRepositoryDemo {
         PageRequest pageRequest = PageRequest.of(0,2);
         Page<Course> resultList = courseRepository.findAll(pageRequest);
         log.info(resultList.getContent().toString());
+    }
+
+    public void jpaQuerySearchByName() {
+        Course azure = courseRepository.findByName("Azure Cloud").orElseThrow(() -> new NotFoundException("Course not found with name Azure"));
+        log.info(azure.toString());
+    }
+
+    public void jpaNamedQuery() {
+        List<Course> allCourse = courseRepository.findAllCourse();
+        log.info(allCourse.toString());
     }
 }
 
