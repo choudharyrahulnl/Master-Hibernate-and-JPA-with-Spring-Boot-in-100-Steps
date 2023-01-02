@@ -86,7 +86,7 @@ Github: https://github.com/in28minutes/jpa-with-hibernate
     <li>Scenario if transaction one failed and other transaction is successful, in this case transaction one will roll back but other transaction has already read the dirty data from transaction one change</li>
 </ul>
 
-<h3>Non Repeatable Read: </h3>
+<h3>Non Repeatable Read: </h3> 
 <ul>
     <li>If 2 Transaction are happening in parallel</li>
     <li>First transaction read some value</li>
@@ -111,6 +111,13 @@ Github: https://github.com/in28minutes/jpa-with-hibernate
     <li>Serializable: Solves Dirty Read & Non-Repeatable Read & Phantom Read (Table Lock for the where constraint), if we read a table using select * from table then all other transaction will wait</li>
 </ul>
 
-Note: 
-Read Committed is used by most of the application
-MySQL has default isolation level of REPEATABLE READ
+<h3>Note: </h3>
+<ul>
+    <li>Read Committed is used by most of the application</li>
+    <li>MySQL has default isolation level of REPEATABLE READ</li>
+    <li>Spring Transaction: @Transactional(isolation = Isolation.REPEATABLE_READ)</li>
+    <li>Hibernate: spring.jpa.properties.hibernate.connection.isolation=4 for Repeatable Read & 8 for Serializable & 2 for Read Committed</li>
+</ul>
+
+
+

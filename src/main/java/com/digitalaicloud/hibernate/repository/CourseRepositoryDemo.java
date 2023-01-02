@@ -6,23 +6,29 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 @Repository
-@Transactional // IF WE CHANGE DATA WE NEED @TRANSACTIONAL EX INSERT/UPDATE/DELETE
+@Transactional(isolation = Isolation.REPEATABLE_READ) // IF WE CHANGE DATA WE NEED @TRANSACTIONAL EX INSERT/UPDATE/DELETE
 @Slf4j
 public class CourseRepositoryDemo {
 
     private EntityManager entityManager;
+    private CourseRepository courseRepository;
 
-    public CourseRepositoryDemo(EntityManager entityManager) {
+    public CourseRepositoryDemo(EntityManager entityManager, CourseRepository courseRepository) {
         this.entityManager = entityManager;
+        this.courseRepository = courseRepository;
     }
 
     public Course findById(Long id) {
@@ -272,6 +278,24 @@ public class CourseRepositoryDemo {
         TypedQuery<Course> query = entityManager.createQuery(criteriaQuery.select(courseRoot));
         List<Course> resultList = query.getResultList();
         log.info(resultList.toString());
+    }
+
+    public void jpaSortDesc() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "name");
+        List<Course> resultList = courseRepository.findAll(sort);
+        log.info(resultList.toString());
+    }
+
+    public void jpaSortsDesc() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "name").and(Sort.by(Sort.Direction.DESC, "createdDate"));
+        List<Course> resultList = courseRepository.findAll(sort);
+        log.info(resultList.toString());
+    }
+
+    public void jpaPagination() {
+        PageRequest pageRequest = PageRequest.of(0,2);
+        Page<Course> resultList = courseRepository.findAll(pageRequest);
+        log.info(resultList.getContent().toString());
     }
 }
 
